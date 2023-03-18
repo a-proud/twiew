@@ -1,0 +1,12 @@
+{{section.custom_html_top|default('')}}
+
+<div class="one_column_center__container {{twiew.one_column_center.container.class|default('')}} {{section.class|default('')}}">
+	{% for component in section.components %}
+		{% set component = component %}
+		{% if component.slot == '1' %}
+			{% include component.tpl %}
+		{% endif %}
+	{% endfor %}
+</div>
+
+{{section.custom_html_bottom|default('')}}

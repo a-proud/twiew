@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{twiew.htmllang|default('en')}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{{twiew.head|default('')}}
+    <title>{{twiew.title|default('')}}</title>
+	<link rel="icon" type="image/png" sizes="16x16 32x32 64x64" href="{{twiew.fawicon_href|default('/favicon.png')}}">
+	{% if twiew.css %}
+		{% for css in twiew.css %}
+			<link rel="stylesheet" href="{{css}}">
+		{% endfor %}
+	{% endif %}
+    
+	{% if twiew.js_top %}
+		{% for js in twiew.js_top|sort((a, b) => a.weight <=> b.weight)|column('src') %}
+			<script src="{{js}}"></script>
+		{% endfor %}
+	{% endif %}
+</head>
+<body>
+{% if twiew.sections.header %}
+	<header>
+		{% for sectionKey, sectionInclude in twiew.sections.header|sort %}
+			{% set section = sectionInclude %}
+			{% if sectionInclude.layout %}
+				{% include sectionInclude.layout %}
+			{% endif %}
+		{% endfor %}
+	</header>
+{% endif %}
+{% if twiew.sections.main %}
+	<main>
+		{% for sectionKey, sectionInclude in twiew.sections.main|sort %}
+			{% set section = sectionInclude %}
+			{% if sectionInclude.layout %}
+				{% include sectionInclude.layout %}
+			{% endif %}
+		{% endfor %}
+		
+		{% for sectionKey, sectionInclude in twiew.sections.main|sort %}
+			{% set section = sectionInclude %}
+			{% block section %}
+            
+			{% endblock %}
+		{% endfor %}
+	</main>
+{% endif %}
+{% if twiew.sections.footer %}
+	<footer>
+		{% for sectionKey, sectionInclude in twiew.sections.footer|sort %}
+			{% set section = sectionInclude %}
+			{% if sectionInclude.layout %}
+				{% include sectionInclude.layout %}
+			{% endif %}
+		{% endfor %}
+	</footer>
+{% endif %}
+
+{% if twiew.js_bottom %}
+	{% for js in twiew.js_bottom|sort((a, b) => a.weight <=> b.weight)|column('src') %}
+		<script src="{{js}}"></script>
+	{% endfor %}
+{% endif %}
+</body>
+</html>
