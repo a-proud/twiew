@@ -1,0 +1,31 @@
+{{section.custom_html_top}}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-4">
+		{% for component in components%}
+			{% if component.slot == '1' %}
+				{% include component.tpl %}
+			{% endif %}
+		{% endfor %}
+		</div>
+		
+		<div class="col-4">
+		{% for component in components%}
+			{% if component.slot == '2' %}
+				{% include component.tpl %}
+			{% endif %}
+		{% endfor %}
+		</div>
+		
+		<div class="col-4">
+		{% for component in components%}
+			{% if component.slot == '3' %}
+				{% include component.tpl %}
+			{% endif %}
+		{% endfor %}
+		</div>
+	</div>
+</div>
+
+{{section.custom_html_bottom}}

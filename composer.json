@@ -1,0 +1,24 @@
+{
+	"name" : "a-proud/twiew",
+	"type" : "library",
+	"keywords": ["templating", "view", "twig", "layouts"],
+	"description" : "Provide customisable view system based on twig",
+	"license" : "MIT",
+	"authors" : [
+		{
+			"name" : "Sergiy Krikovtsov",
+			"email" : "krikovtsov.sergey@gmail.com"
+		}
+	],
+	"require" : {
+		"php" : ">=7.4",
+        "twig/twig": "^3.5",
+		"minwork/array": "^1.13"
+    },
+	"autoload" : {
+		"psr-4" : {
+			"AProud\\Twiew\\" : "src/"
+		}
+	},
+	"minimum-stability": "dev"
+}

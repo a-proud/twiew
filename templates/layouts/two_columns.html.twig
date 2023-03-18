@@ -1,0 +1,25 @@
+{{section.custom_html_top|default('')|raw}}
+
+<div data-twiew-name="two_columns-container" {{ twiew.two_columns.container|default('')|raw }}>
+	<div data-twiew-name="two_columns-row">
+		
+		<div data-twiew-name="two_columns-col1" {{twiew.two_columns.col1|default('')|raw}}>
+		{% for component in section.components %}
+			{% if component.slot == '1' %}
+				{% include component.tpl %}
+			{% endif %}
+		{% endfor %}
+		</div>
+		
+		<div data-twiew-name="two_columns-col2" {{twiew.two_columns.col2|default('')|raw}}>
+		{% for component in section.components %}
+			{% if component.slot == '2' %}
+				{% include component.tpl %}
+			{% endif %}
+		{% endfor %}
+		</div>
+		
+	</div>
+</div>
+
+{{section.custom_html_bottom|default('')|raw}}

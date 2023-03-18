@@ -1,0 +1,10 @@
+{{section.custom_html_top|default('')}}
+
+{% for component in section.components%}
+	{% set component = component %}
+	{% if component.slot == '1' %}
+		{% include component.tpl %}
+	{% endif %}
+{% endfor %}
+
+{{section.custom_html_bottom|default('')}}

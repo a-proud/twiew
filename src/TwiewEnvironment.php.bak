@@ -1,0 +1,36 @@
+<?php
+
+namespace AProud\Twiew;
+
+class TwiewEnvironment extends \Twig\Environment
+{
+	private $altLexerInstance;
+	
+	/**
+	 *  @return \Twig\Lexer instance with alternative syntax
+	 */
+	private function getAltLexer(): \Twig\Lexer
+	{
+		if (empty($this->altLexer)) {
+			$this->altLexerInstance = new \Twig\Lexer($this, [
+				'tag_comment' => ['{@tw:#', '#}'],
+				'tag_block' => ['{@tw:%', '%}'],
+				'tag_variable' => ['{@tw:{', '}}'],
+				'interpolation' => ['#@tw:{', '}'],
+			]);
+		}
+		return $this->altLexerInstance;
+	}
+	
+	/**
+	 *  \Twig\Template loadTemplate method override. Provide alternative twig syntax for files with .tw.twig extension
+	 */
+	public function loadTemplate(string $cls, string $name, int $index = null): \Twig\Template
+    {
+		if (str_contains($name, '.tw.twig') ) {
+			$this->setLexer($this->getAltLexer());
+		}
+		return parent::loadTemplate($cls, $name, $index);
+	}
+
+}
